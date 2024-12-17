@@ -1,47 +1,60 @@
-<section class="grid grid-cols-3 h-screen">
-    <div class="bg-red text-white text-center rounded-r-extra">
+<section class="grid grid-cols-3 grid-rows-1 h-screen">
+    <div class="bg-gradient-to-l from-purple 0% via-blue 50% to-green 100% 100% text-white text-center rounded-r-extra">
         <h1 class="text-5xl font-bold">Edit <%= resource_name.to_s.humanize %></h1>
         <p>
             This is where all your information lives :) Edit it as you wish
         </p>
     </div>
-    <div id="account">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "pl-4 col-span-2"}) do |f| %>
-            <h2 class="text-4xl">Account Settings</h2>
-            <div class="field">
-                <%= f.label :email %><br />
-                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-            </div>
+    <section class="flex flex-col items-center col-span-2 py-4">
+        <div id="account">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put}) do |f| %>
+                <h2 class="text-4xl">Account Settings</h2>
+                <div class="field">
+                    <%= f.label :email %><br />
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                </div>
 
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-            <% end %>
-
-            <div class="field">
-                <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-                <%= f.password_field :password, autocomplete: "new-password" %>
-                <% if @minimum_password_length %>
-                <br />
-                <em class="text-red"><%= @minimum_password_length %> characters minimum</em>
+                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
                 <% end %>
-            </div>
 
-            <div class="field">
-                <%= f.label :password_confirmation %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-            </div>
+                <div class="field">
+                    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+                    <%= f.password_field :password, autocomplete: "new-password" %>
+                    <% if @minimum_password_length %>
+                    <br />
+                    <em class="text-red"><%= @minimum_password_length %> characters minimum</em>
+                    <% end %>
+                </div>
 
-            <div class="field">
-                <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-                <%= f.password_field :current_password, autocomplete: "current-password" %>
-            </div>
-            
-            <div class="actions">
-                <%= f.submit "Update", class: "btn " %>
-            </div>
-        <% end %>
-    </div>
-    <div id="info">
-        
-    </div>
+                <div class="field">
+                    <%= f.label :password_confirmation %><br />
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                </div>
+
+                <div class="field">
+                    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+                    <%= f.password_field :current_password, autocomplete: "current-password" %>
+                </div>
+                
+                <%= f.submit "Update", class: "button filled" %>
+            <% end %>
+        </div>
+        <br />
+        <div id="info">
+            <%= form_with url: users_additional_information_path do |f| %>
+                <h2 class="text-4xl">Additional Information</h2>
+                <div>
+                    <div class="field">
+                        <%= f.label :legal_first_name %><br />
+                        <%= f.password_field :legal_first_name, autocomplete: "legal-first-name" %>
+                    </div>
+                    <div class="field">
+                        <%= f.label :legal_last_name %><br />
+                        <%= f.password_field :legal_last_name, autocomplete: "legal-last-name" %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </section>
 </section>

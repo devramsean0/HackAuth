@@ -11,3 +11,29 @@
 }
 
 */
+
+@layer components {
+  .button {
+    @apply cursor-pointer font-bold rounded-full inline-flex items-center justify-center shadow-md tracking-wide transition-transform duration-150 ease-in-out box-border m-0 min-w-0 appearance-none text-center leading-normal no-underline px-4 py-2 border-0 text-base my-3;
+    &:focus,
+    &:hover {
+      @apply shadow-lg transform scale-105;
+    }
+    
+    &.lg {
+      @apply text-lg leading-tight px-8 py-4;
+    }
+    
+    &.outline {
+      @apply bg-none text-red border border-current;
+    }
+
+    &.filled {
+      @apply text-white bg-red;
+    }
+    
+    &.cta {
+      @apply text-base bg-gradient-to-r from-orange to-red;
+    }
+  }
+}
