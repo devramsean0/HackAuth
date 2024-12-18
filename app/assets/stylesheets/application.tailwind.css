@@ -36,4 +36,7 @@
       @apply text-base bg-gradient-to-r from-orange to-red;
     }
   }
+  .field {
+    @apply pt-2
+  }
 }

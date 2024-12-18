@@ -7,3 +7,6 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Account
+User.create! :legal_first_name => 'John', :legal_last_name => "Doe", :preferred_first_name => 'John', :preferred_last_name => "Doe", :email => 'dev@dev.com', :password => 'password', :password_confirmation => 'password'

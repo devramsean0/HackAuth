@@ -3,7 +3,20 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
-      /* Email styles need to be inline */
+    :root {
+      --primary: #ec3750;
+    }
+    a {
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-position: under;
+    }
+
+    a:focus,
+    a:hover {
+      text-decoration-style: wavy;
+      text-decoration-skip-ink: none;
+    }
     </style>
   </head>
 
