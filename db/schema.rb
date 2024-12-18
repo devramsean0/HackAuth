@@ -10,15 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_16_095132) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_18_194742) do
   create_table "applications", force: :cascade do |t|
     t.string "name"
-    t.string "client_id"
     t.string "client_secret"
     t.string "owner_slack_id"
     t.boolean "approved"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "oauth2_sessions", force: :cascade do |t|
+    t.integer "user_id"
+    t.decimal "client_id", null: false
+    t.string "state", null: false
+    t.string "redirect_uri", null: false
+    t.string "response_type", null: false
+    t.string "scope", null: false
+    t.string "code", null: false
+    t.boolean "show_prompt", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_oauth2_sessions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

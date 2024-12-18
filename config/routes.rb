@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   namespace :user do
     post "profile/edit"
   end
+  namespace :oauth2 do
+    get "authorize" => "authorize#new"
+  end
   get "static/home"
   devise_for :users
   get "up" => "rails/health#show", as: :rails_health_check
