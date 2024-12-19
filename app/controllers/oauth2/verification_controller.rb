@@ -5,7 +5,7 @@ class Oauth2::VerificationController < ApplicationController
         current_user.otp_secret = User.generate_otp_secret
         current_user.save!
         issuer = 'HackAuth'
-        label = "#{issuer}:#{current_user.email}"
+        label = "#{current_user.email}"
         provisioning_uri = current_user.otp_provisioning_uri(label, issuer: issuer)
         qrcode = RQRCode::QRCode.new(provisioning_uri)
         @svg = qrcode.as_svg(
@@ -16,6 +16,23 @@ class Oauth2::VerificationController < ApplicationController
         )
         render "configure_verification"
       end
+    end
+  end
+  
+  def validate
+    oauth_session = Oauth2::Session.find_by(id: Integer(session[:oauth_session_id]))
+    if current_user.validate_and_consume_and_set_otp!(params[:otp_code], oauth_session)
+      render json: { success: true, valid: true }
+    else
+      render json: { success:true, valid: false }
+    end
+  end
+
+  def redirect
+    oauth_session = Oauth2::Session.find_by(id: Integer(session[:oauth_session_id]))
+    redirect_uri = "#{oauth_session.redirect_uri}?code=#{oauth_session.code}"
+    if oauth_session.otp_validated
+      # TODO: Redirect to url
     end
   end
 end

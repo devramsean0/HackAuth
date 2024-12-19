@@ -8,4 +8,9 @@
 <div class="flex justify-center pt-4">
     <%= raw @svg %>
 </div>
-<form>
+
+<div class="flex justify-center py-2" data-controller="otpValidate" data-otpValidate-redirectUrl="/oauth2/verify/redirect" data-otpValidate-incorrect="Your OTP is invalid. Try entering it again, or rescanning the QR">
+    <input data-otpValidate-target="input" placeholder="OTP Code"/>
+    <button data-action="click->otpValidate#validate" class="button filled">Validate</button>
+</div>
+<div data-otpValidate-target="errorMessage"></div>
