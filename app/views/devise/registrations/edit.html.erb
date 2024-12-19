@@ -45,6 +45,14 @@
         <%= f.label :preferred_last_name %><br />
         <%= f.text_field :preferred_last_name %>
     </div>
+    <div class="field">
+        <%= f.label :dob %><br />
+        <%= f.text_field :dob, placeholder: "DD/MM/YYYY" %>
+    </div>
+    <div class="field">
+        <%= f.label :phone_number %><br />
+        <%= f.telephone_field :phone_number %>
+    </div>
     <%= f.submit "Update", class: "button filled" %>
 <% end %>
 <div class="flex">

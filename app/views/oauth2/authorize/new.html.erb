@@ -1,0 +1,18 @@
+<% title "Authorize Application" %>
+
+<h2 class="text-4xl">Authorize <%= @application.name %>?</h2>
+<% if !@application.approved %>
+    <h3 class="text-red text-2xl font-bold">WARNING: This application has not been approved. Treat with caution</h3>
+<% end %>
+This application wants access to the following infomation from your profile:
+<ul class="p-3 list-disc">
+    <% oauth2_scopes.each do |scope| %>
+        <% if @scope.include?(scope[:scope]) %>
+            <li><%= scope[:scope] %> - <%= scope[:description] %></li>
+        <% end %>
+    <% end %>
+</ul>
+
+<div class="flex gap-4">
+    <%= link_to "Allow", oauth2_verify_path, class: "button filled" %>
+</div>

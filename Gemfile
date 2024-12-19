@@ -55,6 +55,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem 'letter_opener_web', '~> 3.0'
+  gem "hotwire-spark"
 end
 
 group :test do
@@ -66,3 +67,7 @@ end
 gem "tailwindcss-rails", "~> 3.0"
 
 gem "devise", "~> 4.9"
+
+gem "devise-two-factor", "~> 6.1"
+gem "rotp", "~> 6.3"
+gem "rqrcode", "~> 2.2"

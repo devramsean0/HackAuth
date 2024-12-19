@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     post "profile/edit"
   end
   namespace :oauth2 do
+    get "verify" => "verification#edit"
     get "authorize" => "authorize#new"
   end
   get "static/home"

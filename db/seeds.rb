@@ -9,4 +9,7 @@
 #   end
 
 # Account
-User.create! :legal_first_name => 'John', :legal_last_name => "Doe", :preferred_first_name => 'John', :preferred_last_name => "Doe", :email => 'dev@dev.com', :password => 'password', :password_confirmation => 'password'
+User.create! :legal_first_name => 'John', :legal_last_name => "Doe", :preferred_first_name => 'John', :preferred_last_name => "Doe", :email => 'dev@dev.com', :password => 'password', :password_confirmation => 'password', :confirmed_at => DateTime.now, :dob => "01/01/1970", :phone_number => "++44 0000 123456"
+
+# Test Application
+Application.create! :name => "Test", :client_secret => "HelloWorld", :approved => true
