@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   namespace :oauth2 do
     get "verify" => "verification#edit"
     get "verify/redirect" => "verification#redirect"
-    post "verify" => "verifications#validate"
+    post "verify" => "verification#validate"
     get "authorize" => "authorize#new"
   end
   get "static/home"

@@ -1,8 +1,8 @@
-import { Controller } from "stimulus"
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
     static values = {
-        redirectUrl: String,
+        redirecturl: String,
         incorrect: String,
     }
     static targets = ["input", "errorMessage"];
@@ -13,9 +13,9 @@ export default class extends Controller {
             val.json().then((val) => {
                 if (!val.success) throw console.error("OTP validation was unsuccessful")
                 if (val.valid) {
-                    location.href = this.redirectUrlValue
+                    location.href = this.redirecturlValue
                 } else {
-                    this.errorMessageTarget.innerHTML = `<p class="text-red text-bold">Invalid OTP code, try again?</p>`
+                    this.errorMessageTarget.innerHTML = `<p class="text-red text-bold">${this.incorrectValue}</p>`
                 }
             })
         })

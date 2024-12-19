@@ -1,4 +1,5 @@
 class Oauth2::VerificationController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:validate] # This is just a normal API endpoint. And is therefore safe to skip CSRF protection.
   def edit
     if current_user.verification_enabled
       if !current_user.otp_secret || params[:force_qr]
@@ -20,8 +21,7 @@ class Oauth2::VerificationController < ApplicationController
   end
   
   def validate
-    oauth_session = Oauth2::Session.find_by(id: Integer(session[:oauth_session_id]))
-    if current_user.validate_and_consume_and_set_otp!(params[:otp_code], oauth_session)
+    if current_user.validate_and_consume_and_set_otp!(params[:otp_code], session[:oauth_session_id])
       render json: { success: true, valid: true }
     else
       render json: { success:true, valid: false }

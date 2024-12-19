@@ -3,13 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :registerable, :recoverable, :rememberable, :validatable, :confirmable, :two_factor_authenticatable
 
-  def self.validate_and_consume_and_set_otp!(otp_code, oauth2_session)
+  def validate_and_consume_and_set_otp!(otp_code, session_id)
     if self.validate_and_consume_otp!(otp_code)
-      oauth2_session.otp_validated = true
-      oauth2_session.save!
-      render json: { success: true, valid: true }
+      oauth_session = Oauth2::Session.find_by(id: Integer(session_id))
+      oauth_session.update(otp_validated: true)
+      return true
     else
-      render json: { success:true, valid: false }
+      return false
     end
   end
 end
